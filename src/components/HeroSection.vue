@@ -11,25 +11,7 @@
     ></div>
 
     <!-- Navigacao -->
-    <nav class="relative z-10 flex items-center justify-between p-6 max-w-7xl mx-auto">
-      <div class="flex items-center gap-2">
-        <div
-          class="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center"
-        >
-          <span class="text-white text-lg">🃏</span>
-        </div>
-        <span class="text-xl font-bold text-white">CardTrade</span>
-      </div>
-
-      <div class="hidden md:flex items-center gap-8">
-        <a href="#" class="text-gray-300 hover:text-white transition-colors">Marketplace</a>
-        <a href="#" class="text-gray-300 hover:text-white transition-colors">Minhas Cartas</a>
-        <a href="#" class="text-gray-300 hover:text-white transition-colors">Trocas</a>
-        <Button variant="outline" class="border-white/20 text-black hover:bg-white/20">
-          Login
-        </Button>
-      </div>
-    </nav>
+    <AppNavigation />
 
     <!-- Hero Content -->
     <div class="relative z-10 max-w-7xl mx-auto px-6 pt-20 pb-32">
@@ -181,6 +163,7 @@ import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import AppNavigation from '@/components/AppNavigation.vue'
 
 const stats = ref({
   cards: '10K',

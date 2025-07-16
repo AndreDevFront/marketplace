@@ -103,7 +103,12 @@ const onSubmit = handleSubmit(async (values) => {
     await login(values)
 
     toast.success('Login realizado com sucesso!')
-    router.push('/')
+    const redirect = router.currentRoute.value.query.redirect as string
+
+    const redirectPath =
+      redirect && redirect.startsWith('/') && !redirect.startsWith('//') ? redirect : '/'
+
+    router.push(redirectPath)
   } catch (error) {
     console.error('Erro ao fazer login:', error)
   }
