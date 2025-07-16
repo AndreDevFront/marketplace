@@ -1,0 +1,6 @@
+export { default as Card } from './UiCard.vue'
+export { default as CardContent } from './UiCardContent.vue'
+export { default as CardDescription } from './UiCardDescription.vue'
+export { default as CardFooter } from './UiCardFooter.vue'
+export { default as CardHeader } from './UiCardHeader.vue'
+export { default as CardTitle } from './UiCardTitle.vue'
