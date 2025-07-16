@@ -2,13 +2,11 @@
   <div id="app">
     <router-view />
 
-    <!-- Teste temporário - REMOVER depois -->
-    <div class="fixed bottom-4 right-4 z-50">
-      <AuthTest />
-    </div>
+    <!-- Toast notifications -->
+    <UiToaster position="top-right" :duration="4000" close-button />
   </div>
 </template>
 
 <script setup lang="ts">
-import AuthTest from '@/components/AuthTest.vue'
+import UiToaster from './components/ui/toast/UiToaster.vue'
 </script>

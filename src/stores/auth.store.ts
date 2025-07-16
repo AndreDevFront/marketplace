@@ -2,12 +2,15 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { authService } from '@/services/auth.service'
 import { getUserData, getAuthToken } from '@/lib/auth.utils'
+
 import type {
   User,
   LoginCredentials,
   RegisterData,
   AuthError
 } from '@/types/auth.types'
+
+import { toast } from 'vue-sonner'
 
 
 interface AuthActions {
@@ -63,6 +66,8 @@ export const useAuthStore = defineStore('auth', () => {
       const authError = err as AuthError
       error.value = authError.message
 
+      toast.error(authError.message)
+
       user.value = null
       token.value = null
 
@@ -84,6 +89,9 @@ export const useAuthStore = defineStore('auth', () => {
     } catch (err) {
       const authError = err as AuthError
       error.value = authError.message
+
+      toast.error(authError.message)
+
       throw authError
     } finally {
       isLoading.value = false
