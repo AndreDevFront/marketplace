@@ -12,7 +12,7 @@
 
     <AppNavigation />
 
-    <div class="relative z-10 max-w-7xl mx-auto px-6 pt-20 pb-32">
+    <div class="max-w-7xl mx-auto px-6 pt-20 pb-32">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
         <div class="space-y-8">
           <Badge

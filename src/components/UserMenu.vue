@@ -20,7 +20,7 @@
       v-if="menuOpen"
       class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50"
     >
-      <router-link
+      <!-- <router-link
         to="/profile"
         @click="menuOpen = false"
         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -44,7 +44,7 @@
         🔄 Minhas Trocas
       </router-link>
 
-      <hr class="my-1" />
+      <hr class="my-1" /> -->
 
       <button
         @click="handleLogout"

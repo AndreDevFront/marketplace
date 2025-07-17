@@ -71,16 +71,21 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useCards } from '@/composables/useCards'
-import type { Card } from '@/types/cards.types'
+import type { Card as Cards } from '@/types/cards.types'
 
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Card } from '@/components/ui/card'
+
+import { useToast } from '@/composables/useToast'
+
+const toast = useToast()
 
 // Image loading state
 const imageLoading = ref(true)
 
 interface Props {
-  card: Card
+  card: Cards
   showAddButton?: boolean
 }
 
@@ -99,14 +104,16 @@ const handleAdd = async () => {
 
   try {
     await addCardsToCollection([props.card.id])
+    toast.success(`${props.card.name} adicionada à coleção!`)
   } catch (error) {
+    toast.error('Erro ao adicionar carta à coleção')
     console.error('Erro ao adicionar carta à coleção:', error)
   }
 }
 
 const onImageError = (event: Event) => {
   const img = event.target as HTMLImageElement
-  img.src = '/placeholder-card.png'
+  img.src = 'https://via.placeholder.com/300x400/e2e8f0/64748b?text=🃏'
 }
 
 const onImageLoad = () => {
