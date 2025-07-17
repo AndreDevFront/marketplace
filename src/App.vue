@@ -1,12 +1,14 @@
 <template>
   <div id="app">
-    <router-view />
+    <AppSuspense>
+      <router-view />
+    </AppSuspense>
 
-    <!-- Toast notifications -->
-    <UiToaster position="top-right" :duration="4000" close-button />
+    <Toaster position="top-right" :duration="4000" :close-button="true" rich-colors />
   </div>
 </template>
 
 <script setup lang="ts">
-import UiToaster from './components/ui/toast/UiToaster.vue'
+import { Toaster } from 'vue-sonner'
+import AppSuspense from '@/components/AppSuspense.vue'
 </script>

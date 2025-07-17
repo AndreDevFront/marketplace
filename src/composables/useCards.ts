@@ -1,8 +1,11 @@
 import { storeToRefs } from 'pinia'
 import { useCardsStore } from '@/stores/cards.store'
+import { useCache } from '@/composables/useCache'
+
 
 export const useCards = () => {
   const cardsStore = useCardsStore()
+  const { clearCache } = useCache()
 
   const {
     userCards,
@@ -26,6 +29,13 @@ export const useCards = () => {
     resetState
   } = cardsStore
 
+  const refreshCache = () => {
+    clearCache('cards-all')
+    clearCache('cards-user')
+    fetchAllCards()
+    fetchUserCards()
+  }
+
   return {
     userCards,
     allCards,
@@ -42,6 +52,9 @@ export const useCards = () => {
     addCardsToCollection,
     loadMoreCards,
     clearError,
-    resetState
+    resetState,
+    refreshCache
   }
 }
+
+export type UseCardsReturn = ReturnType<typeof useCards>

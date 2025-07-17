@@ -54,19 +54,25 @@
             @click="loadMoreCards"
             :disabled="isLoading"
             variant="outline"
-            class="border-white/20 text-white hover:bg-white/20"
+            class="border-white/20 text-black hover:bg-white/20"
           >
             {{ isLoading ? 'Carregando...' : 'Carregar Mais' }}
           </Button>
         </div>
       </div>
 
-      <div v-if="isLoading && allCards.length === 0" class="text-center py-12">
-        <Card class="p-8 max-w-md mx-auto">
-          <div
-            class="animate-spin w-8 h-8 border-2 border-primary border-t-transparent rounded-full mx-auto mb-4"
-          ></div>
-          <p class="text-muted-foreground">Carregando cartas...</p>
+      <div
+        v-if="isLoading"
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      >
+        <Card class="p-8 max-w-md w-full mx-auto bg-white shadow-2xl">
+          <div class="text-center">
+            <div
+              class="animate-spin w-12 h-12 border-4 border-primary border-t-transparent rounded-full mx-auto mb-6"
+            ></div>
+            <p class="text-muted-foreground text-lg font-medium">Carregando cartas...</p>
+            <p class="text-muted-foreground/70 text-sm mt-2">Por favor, aguarde...</p>
+          </div>
         </Card>
       </div>
     </div>

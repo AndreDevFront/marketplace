@@ -37,7 +37,7 @@
       </router-link>
 
       <router-link
-        to="/trades"
+        to="/my-trades"
         @click="menuOpen = false"
         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
       >

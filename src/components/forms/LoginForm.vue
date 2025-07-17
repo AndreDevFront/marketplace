@@ -110,6 +110,7 @@ const onSubmit = handleSubmit(async (values) => {
 
     router.push(redirectPath)
   } catch (error) {
+    toast.error('Erro ao fazer login!')
     console.error('Erro ao fazer login:', error)
   }
 })

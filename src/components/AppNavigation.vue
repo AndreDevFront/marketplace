@@ -13,16 +13,17 @@
 
         <div class="hidden md:flex items-center gap-8">
           <router-link to="/" class="nav-link">Home</router-link>
+          <router-link to="/marketplace" class="nav-link">Marketplace</router-link>
 
           <template v-if="isAuthenticated">
             <router-link to="/cards" class="nav-link">Minhas Cartas</router-link>
-            <router-link to="/trades" class="nav-link">Trocas</router-link>
+            <router-link to="/my-trades" class="nav-link">Minhas Trocas</router-link>
             <UserMenu />
           </template>
 
           <template v-else>
             <router-link to="/auth/login" class="nav-link">Login</router-link>
-            <Button as-child variant="outline" class="border-white/20 text-white hover:bg-white/20">
+            <Button as-child variant="outline" class="border-white/20 text-black hover:bg-white/20">
               <router-link to="/auth/register">Registrar</router-link>
             </Button>
           </template>
@@ -43,13 +44,16 @@
           <router-link to="/" @click="mobileMenuOpen = false" class="mobile-nav-link">
             Home
           </router-link>
+          <router-link to="/marketplace" @click="mobileMenuOpen = false" class="mobile-nav-link">
+            Marketplace
+          </router-link>
 
           <template v-if="isAuthenticated">
             <router-link to="/cards" @click="mobileMenuOpen = false" class="mobile-nav-link">
               Minhas Cartas
             </router-link>
-            <router-link to="/trades" @click="mobileMenuOpen = false" class="mobile-nav-link">
-              Trocas
+            <router-link to="/my-trades" @click="mobileMenuOpen = false" class="mobile-nav-link">
+              Minhas Trocas
             </router-link>
             <router-link to="/profile" @click="mobileMenuOpen = false" class="mobile-nav-link">
               Perfil

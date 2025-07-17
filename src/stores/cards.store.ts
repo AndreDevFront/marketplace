@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed, readonly } from 'vue'
-import { toast } from 'vue-sonner'
+
 
 import { cardsService } from '@/services/cards.service'
 import type {
@@ -23,10 +23,18 @@ export const useCardsStore = defineStore('cards', () => {
   const isLoading = ref(false)
   const error = ref<string | null>(null)
 
+  const cacheTimeout = 5 * 60 * 1000
+  const lastFetch = ref<number | null>(null)
+
   const userCardsCount  = computed(() => userCards.value.length)
   const allCardsCount   = computed(() => allCards.value.length)
   const hasUserCards    = computed(() => userCardsCount.value > 0)
   const hasMoreCards    = computed(() => pagination.value.more)
+
+  const isCacheValid = computed(() => {
+    if (!lastFetch.value) return false
+    return (Date.now() - lastFetch.value) < cacheTimeout
+  })
 
 
   const fetchUserCards = async (): Promise<void> => {
@@ -40,7 +48,7 @@ export const useCardsStore = defineStore('cards', () => {
     } catch (err) {
       const errorMessage = (err as Error).message
       error.value = errorMessage
-      toast.error(errorMessage)
+
     } finally {
       isLoading.value = false
     }
@@ -48,6 +56,12 @@ export const useCardsStore = defineStore('cards', () => {
 
 
   const fetchAllCards = async (filters: CardsFilters = {}): Promise<void> => {
+
+    if (isCacheValid.value && !filters.page && !filters.search && allCards.value.length > 0) {
+      return // Cache hit! 🎯
+    }
+
+
     try {
       isLoading.value = true
       error.value = null
@@ -56,6 +70,7 @@ export const useCardsStore = defineStore('cards', () => {
 
       if (filters.page === 1 || !filters.page) {
         allCards.value = response.list
+        lastFetch.value = Date.now()
       } else {
         allCards.value = [...allCards.value, ...response.list]
       }
@@ -69,7 +84,7 @@ export const useCardsStore = defineStore('cards', () => {
     } catch (err) {
       const errorMessage = (err as Error).message
       error.value = errorMessage
-      toast.error(errorMessage)
+
     } finally {
       isLoading.value = false
     }
@@ -84,12 +99,12 @@ export const useCardsStore = defineStore('cards', () => {
 
       await fetchUserCards()
 
-      toast.success('Cartas adicionadas à sua coleção!')
+
 
     } catch (err) {
       const errorMessage = (err as Error).message
       error.value = errorMessage
-      toast.error(errorMessage)
+
       throw err
     } finally {
       isLoading.value = false

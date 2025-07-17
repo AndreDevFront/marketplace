@@ -10,15 +10,11 @@
       class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse delay-1000"
     ></div>
 
-    <!-- Navigacao -->
     <AppNavigation />
 
-    <!-- Hero Content -->
     <div class="relative z-10 max-w-7xl mx-auto px-6 pt-20 pb-32">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <!-- Left Column - Content -->
         <div class="space-y-8">
-          <!-- Badge -->
           <Badge
             variant="secondary"
             class="bg-white/10 border-white/20 text-white backdrop-blur-sm"
@@ -26,7 +22,6 @@
             ⭐ Marketplace #1 para Colecionadores
           </Badge>
 
-          <!-- Main Heading -->
           <div class="space-y-4">
             <h1 class="text-5xl lg:text-7xl font-bold text-white leading-tight">
               Troque suas
@@ -42,23 +37,15 @@
             </p>
           </div>
 
-          <!-- CTA Buttons -->
           <div class="flex flex-col sm:flex-row gap-4">
-            <Button
-              class="group px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold"
-            >
-              Começar a Trocar
-              <span class="ml-2 group-hover:translate-x-1 transition-transform">→</span>
-            </Button>
             <Button
               variant="outline"
               class="px-8 py-4 border-white/20 text-black hover:bg-white/20 backdrop-blur-sm"
             >
-              Ver Marketplace
+              <router-link to="/marketplace">Ver Marketplace</router-link>
             </Button>
           </div>
 
-          <!-- Stats -->
           <div class="flex gap-8 pt-8">
             <div class="text-center">
               <div class="text-3xl font-bold text-white">{{ stats.cards }}+</div>
@@ -75,9 +62,7 @@
           </div>
         </div>
 
-        <!-- Cards Display -->
         <div class="relative">
-          <!-- Main Card -->
           <Card
             class="relative group cursor-pointer transform hover:scale-105 transition-all duration-500 bg-gradient-to-br from-gray-800 to-gray-900 border-white/10 p-8"
           >
@@ -85,9 +70,7 @@
               class="absolute inset-0 bg-gradient-to-r from-blue-500/50 to-purple-600/50 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-75"
             ></div>
 
-            <!-- Card Content -->
             <div class="relative z-10">
-              <!-- Card Image -->
               <div
                 class="aspect-[3/4] bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl mb-6 flex items-center justify-center"
               >
@@ -113,7 +96,6 @@
             </div>
           </Card>
 
-          <!-- Mini Cards -->
           <div
             class="absolute -top-8 -left-8 w-24 h-32 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg opacity-75 transform rotate-12 hover:rotate-6 transition-transform duration-300"
           ></div>
@@ -127,7 +109,6 @@
       </div>
     </div>
 
-    <!-- Features Preview -->
     <div class="relative z-10 max-w-7xl mx-auto px-6 pb-20">
       <div class="grid md:grid-cols-3 gap-8">
         <Card

@@ -11,7 +11,9 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "build:analyze": "vite build --mode analyze",
+    "preview:network": "vite preview --host"
   },
   "dependencies": {
     "@tanstack/vue-table": "^8.21.3",

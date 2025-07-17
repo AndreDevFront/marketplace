@@ -2,10 +2,7 @@ import axios from 'axios'
 import type { AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig } from 'axios'
 import { getAuthToken, removeAuthToken, normalizeApiError } from '@/lib/auth.utils'
 
-
-type RequestData = Record<string, unknown> | FormData | string | number | boolean | null
-
-type ApiResponse<T = unknown> = T
+type RequestData = Record<string, unknown> | FormData | string | number | boolean | null | undefined
 
 type HttpError = {
   config?: InternalAxiosRequestConfig
@@ -35,7 +32,6 @@ class HttpClient {
     this.setupInterceptors()
   }
 
-
   private setupInterceptors(): void {
     this.instance.interceptors.request.use(
       (config) => this.addAuthToken(config),
@@ -51,7 +47,6 @@ class HttpClient {
     )
   }
 
-
   private addAuthToken(config: InternalAxiosRequestConfig): InternalAxiosRequestConfig {
     const token = getAuthToken()
 
@@ -61,7 +56,6 @@ class HttpClient {
 
     return config
   }
-
 
   private handleSuccessResponse(response: AxiosResponse): AxiosResponse {
     if (import.meta.env.DEV) {
@@ -73,7 +67,6 @@ class HttpClient {
 
     return response
   }
-
 
   private async handleErrorResponse(error: unknown): Promise<never> {
     const normalizedError = normalizeApiError(error)
@@ -87,14 +80,12 @@ class HttpClient {
       })
     }
 
-
     if (normalizedError.statusCode === 401) {
       await this.handleUnauthorized()
     }
 
     return Promise.reject(normalizedError)
   }
-
 
   private async handleUnauthorized(): Promise<void> {
     removeAuthToken()
@@ -105,53 +96,30 @@ class HttpClient {
   }
 
 
-  async get<TResponse = unknown>(
-    url: string,
-    config?: AxiosRequestConfig
-  ): Promise<ApiResponse<TResponse>> {
-    const response = await this.instance.get<TResponse>(url, config)
+  async get<T = unknown>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    const response = await this.instance.get<T>(url, config)
     return response.data
   }
 
-
-  async post<TResponse = unknown>(
-    url: string,
-    data?: RequestData,
-    config?: AxiosRequestConfig
-  ): Promise<ApiResponse<TResponse>> {
-    const response = await this.instance.post<TResponse>(url, data, config)
+  async post<T = unknown>(url: string, data?: RequestData, config?: AxiosRequestConfig): Promise<T> {
+    const response = await this.instance.post<T>(url, data, config)
     return response.data
   }
 
-
-  async put<TResponse = unknown>(
-    url: string,
-    data?: RequestData,
-    config?: AxiosRequestConfig
-  ): Promise<ApiResponse<TResponse>> {
-    const response = await this.instance.put<TResponse>(url, data, config)
+  async put<T = unknown>(url: string, data?: RequestData, config?: AxiosRequestConfig): Promise<T> {
+    const response = await this.instance.put<T>(url, data, config)
     return response.data
   }
 
-
-  async delete<TResponse = unknown>(
-    url: string,
-    config?: AxiosRequestConfig
-  ): Promise<ApiResponse<TResponse>> {
-    const response = await this.instance.delete<TResponse>(url, config)
+  async delete<T = unknown>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    const response = await this.instance.delete<T>(url, config)
     return response.data
   }
 
-
-  async patch<TResponse = unknown>(
-    url: string,
-    data?: RequestData,
-    config?: AxiosRequestConfig
-  ): Promise<ApiResponse<TResponse>> {
-    const response = await this.instance.patch<TResponse>(url, data, config)
+  async patch<T = unknown>(url: string, data?: RequestData, config?: AxiosRequestConfig): Promise<T> {
+    const response = await this.instance.patch<T>(url, data, config)
     return response.data
   }
-
 
   setAuthToken(token: string): void {
     if (this.instance.defaults.headers) {
@@ -159,18 +127,15 @@ class HttpClient {
     }
   }
 
-
   clearAuthToken(): void {
     if (this.instance.defaults.headers) {
       delete this.instance.defaults.headers.Authorization
     }
   }
 
-
   getBaseURL(): string {
     return this.instance.defaults.baseURL || ''
   }
-
 
   setTimeout(timeout: number): void {
     this.instance.defaults.timeout = timeout
@@ -181,16 +146,3 @@ class HttpClient {
 export const httpClient = new HttpClient()
 
 export const { get, post, put, delete: del, patch } = httpClient
-
-
-export const apiGet = <T = unknown>(url: string, config?: AxiosRequestConfig) =>
-  httpClient.get<T>(url, config)
-
-export const apiPost = <T = unknown>(url: string, data?: RequestData, config?: AxiosRequestConfig) =>
-  httpClient.post<T>(url, data, config)
-
-export const apiPut = <T = unknown>(url: string, data?: RequestData, config?: AxiosRequestConfig) =>
-  httpClient.put<T>(url, data, config)
-
-export const apiDelete = <T = unknown>(url: string, config?: AxiosRequestConfig) =>
-  httpClient.delete<T>(url, config)
