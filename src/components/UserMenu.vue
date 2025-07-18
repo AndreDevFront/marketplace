@@ -12,7 +12,7 @@
         >
           {{ userInitials }}
         </div>
-        <span class="hidden sm:block">{{ userDisplayName }}</span>
+        <span class="hidden sm:block capitalize">{{ userDisplayName }}</span>
       </div>
     </Button>
 
@@ -20,32 +20,6 @@
       v-if="menuOpen"
       class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50"
     >
-      <!-- <router-link
-        to="/profile"
-        @click="menuOpen = false"
-        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-      >
-        👤 Perfil
-      </router-link>
-
-      <router-link
-        to="/cards"
-        @click="menuOpen = false"
-        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-      >
-        🃏 Minhas Cartas
-      </router-link>
-
-      <router-link
-        to="/my-trades"
-        @click="menuOpen = false"
-        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-      >
-        🔄 Minhas Trocas
-      </router-link>
-
-      <hr class="my-1" /> -->
-
       <button
         @click="handleLogout"
         class="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-100"

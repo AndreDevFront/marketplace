@@ -68,7 +68,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useTrades } from '@/composables/useTrades'
-// import { useAuth } from '@/composables/useAuth'
+
 import type { Trade } from '@/types/trades.types'
 
 import { Button } from '@/components/ui/button'
@@ -87,7 +87,6 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const { deleteTrade, isLoading } = useTrades()
-// const { user } = useAuth()
 
 const offeringCards = computed(() => props.trade.tradeCards.filter((tc) => tc.type === 'OFFERING'))
 

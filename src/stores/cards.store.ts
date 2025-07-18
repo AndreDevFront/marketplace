@@ -58,7 +58,7 @@ export const useCardsStore = defineStore('cards', () => {
   const fetchAllCards = async (filters: CardsFilters = {}): Promise<void> => {
 
     if (isCacheValid.value && !filters.page && !filters.search && allCards.value.length > 0) {
-      return // Cache hit! 🎯
+      return
     }
 
 

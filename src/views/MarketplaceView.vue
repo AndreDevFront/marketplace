@@ -123,7 +123,7 @@ const openCreateTradeModal = () => {
 
 const onTradeCreated = () => {
   showCreateModal.value = false
-  fetchAllTrades() // Refresh lista
+  fetchAllTrades()
 }
 
 onMounted(() => {

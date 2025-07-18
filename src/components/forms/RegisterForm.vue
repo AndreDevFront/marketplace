@@ -99,8 +99,12 @@
       <div class="text-center mt-4">
         <p class="text-sm text-muted-foreground">
           Já tem conta?
-          <router-link to="/auth/login" class="text-primary hover:underline">
+          <router-link to="/auth/login" class="text-primary hover:underline font-semibold">
             Entre aqui
+          </router-link>
+          <span>ou</span>
+          <router-link to="/" class="text-primary hover:underline text-cyan-500 font-medium">
+            Home
           </router-link>
         </p>
       </div>
