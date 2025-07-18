@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6 mb-8">
+      <div class="grid md:grid-cols-2 gap-6 mb-8">
         <Card class="p-6 text-center">
           <h3 class="text-2xl font-bold text-primary">{{ tradesCount }}</h3>
           <p class="text-muted-foreground">Trocas Ativas</p>
@@ -33,12 +33,6 @@
         <Card class="p-6 text-center">
           <h3 class="text-2xl font-bold text-primary">{{ uniqueUsers }}</h3>
           <p class="text-muted-foreground">Usuários Ativos</p>
-        </Card>
-
-        <Card class="p-6 text-center">
-          <Button @click="fetchAllTrades" :disabled="isLoading" class="w-full">
-            {{ isLoading ? 'Carregando...' : 'Atualizar' }}
-          </Button>
         </Card>
       </div>
 

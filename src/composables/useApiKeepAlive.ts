@@ -7,7 +7,7 @@ export const useApiKeepAlive = () => {
       await httpClient.get('/cards?rpp=1')
       console.log('✅ API acordada!')
     } catch (error) {
-      console.log('⏳ API hibernada, tentando acordar...', error)
+      console.log('🕐 API hibernada, tentando acordar...', error)
     }
   }
 

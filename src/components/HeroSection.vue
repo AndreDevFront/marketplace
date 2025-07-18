@@ -64,33 +64,41 @@
 
         <div class="relative">
           <Card
-            class="relative group cursor-pointer transform hover:scale-105 transition-all duration-500 bg-gradient-to-br from-gray-800 to-gray-900 border-white/10 p-8"
+            class="relative group cursor-pointer transform hover:scale-105 transition-all duration-500 bg-gradient-to-br from-gray-800 to-gray-900 border-white/10 p-6"
           >
             <div
               class="absolute inset-0 bg-gradient-to-r from-blue-500/50 to-purple-600/50 rounded-xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-75"
             ></div>
 
             <div class="relative z-10">
+              <div v-if="featuredCard" class="space-y-4">
+                <div class="aspect-[3/4] rounded-xl overflow-hidden bg-gray-700">
+                  <img
+                    :src="featuredCard.imageUrl"
+                    :alt="featuredCard.name"
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                </div>
+                <div class="space-y-3">
+                  <h3 class="text-xl font-bold text-white truncate">{{ featuredCard.name }}</h3>
+                  <p class="text-gray-400 text-sm leading-relaxed line-clamp-2">
+                    {{ featuredCard.description }}
+                  </p>
+                  <div class="flex items-center justify-between">
+                    <span class="text-sm text-gray-400">👥 12 interessados</span>
+                    <span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
+                  </div>
+                </div>
+              </div>
+
               <div
-                class="aspect-[3/4] bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl mb-6 flex items-center justify-center"
+                v-else
+                class="aspect-[3/4] bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl mb-4 flex items-center justify-center"
               >
                 <div class="text-white text-center">
                   <div class="text-4xl mb-2">✨</div>
                   <div class="text-lg font-bold">Blue-Eyes</div>
                   <div class="text-sm opacity-75">White Dragon</div>
-                </div>
-              </div>
-
-              <div class="space-y-3">
-                <h3 class="text-xl font-bold text-white">Carta Lendária</h3>
-                <p class="text-gray-400">Uma das cartas mais raras e poderosas do jogo.</p>
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center gap-2">
-                    <span class="text-sm text-gray-400">👥 12 interessados</span>
-                  </div>
-                  <div class="flex items-center gap-1">
-                    <span class="text-yellow-400">⭐⭐⭐⭐⭐</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -131,7 +139,7 @@
           class="bg-white/5 backdrop-blur-sm border-white/10 p-6 hover:bg-white/10 transition-all group"
         >
           <div class="text-4xl mb-4 group-hover:scale-110 transition-transform">✨</div>
-          <h3 class="text-lg font-semibent text-white mb-2">Cartas Raras</h3>
+          <h3 class="text-lg font-semibold text-white mb-2">Cartas Raras</h3>
           <p class="text-gray-400">Encontre cartas impossíveis de achar em outros lugares.</p>
         </Card>
       </div>
@@ -140,16 +148,36 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import AppNavigation from '@/components/AppNavigation.vue'
+import { cardsService } from '@/services/cards.service'
+import type { Card as CardType } from '@/types/cards.types'
 
 const stats = ref({
   cards: '10K',
   users: '2.5K',
   trades: '500',
+})
+
+const featuredCard = ref<CardType | null>(null)
+
+const fetchCard = async () => {
+  try {
+    const response = await cardsService.getAllCards({ rpp: 10 })
+    if (response.list.length > 0) {
+      const randomIndex = Math.floor(Math.random() * response.list.length)
+      featuredCard.value = response.list[randomIndex]
+    }
+  } catch (error) {
+    console.log('Erro ao buscar carta:', error)
+  }
+}
+
+onMounted(() => {
+  fetchCard()
 })
 </script>
 
