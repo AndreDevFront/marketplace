@@ -11,4 +11,9 @@
 <script setup lang="ts">
 import { Toaster } from 'vue-sonner'
 import AppSuspense from '@/components/AppSuspense.vue'
+import { useApiKeepAlive } from '@/composables/useApiKeepAlive'
+
+const { startKeepAlive } = useApiKeepAlive()
+
+startKeepAlive()
 </script>
