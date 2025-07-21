@@ -17,7 +17,7 @@ export default defineConfig({
           vendor: ['vue', 'vue-router', 'pinia'],
 
           // UI components em chunk separado
-          ui: ['@radix-ui/vue', 'lucide-vue-next'],
+          ui: ['radix-vue', 'lucide-vue-next'],
 
           // Validação em chunk separado
           validation: ['zod', 'vee-validate', '@vee-validate/zod'],
