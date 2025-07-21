@@ -55,9 +55,6 @@
             <router-link to="/my-trades" @click="mobileMenuOpen = false" class="mobile-nav-link">
               Minhas Trocas
             </router-link>
-            <router-link to="/profile" @click="mobileMenuOpen = false" class="mobile-nav-link">
-              Perfil
-            </router-link>
             <button @click="handleLogout" class="mobile-nav-link text-left w-full">Sair</button>
           </template>
 
