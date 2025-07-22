@@ -3,7 +3,6 @@
     <h3 class="text-lg font-semibold mb-4">🧪 Teste de Autenticação</h3>
 
     <div class="space-y-4">
-      <!-- Status -->
       <div class="p-3 bg-gray-50 rounded">
         <p><strong>Autenticado:</strong> {{ isAuthenticated ? '✅' : '❌' }}</p>
         <p><strong>Loading:</strong> {{ isLoading ? '⏳' : '✅' }}</p>
@@ -11,7 +10,6 @@
         <p><strong>Erro:</strong> {{ error || 'Nenhum' }}</p>
       </div>
 
-      <!-- Actions -->
       <div class="space-y-2">
         <Button @click="testCheckAuth" :disabled="isLoading" class="w-full">
           Verificar Auth

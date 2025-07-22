@@ -1,15 +1,12 @@
 <template>
   <Card class="w-full max-w-md mx-auto">
     <div class="p-6">
-      <!-- Header -->
       <div class="text-center mb-6">
         <h2 class="text-2xl font-bold">Entrar</h2>
         <p class="text-muted-foreground">Acesse sua conta</p>
       </div>
 
-      <!-- Form -->
       <form @submit="onSubmit" class="space-y-4">
-        <!-- Email -->
         <div class="space-y-2">
           <label class="text-sm font-medium">Email</label>
           <Input
@@ -27,7 +24,6 @@
           </div>
         </div>
 
-        <!-- Password -->
         <div class="space-y-2">
           <label class="text-sm font-medium">Senha</label>
           <Input
@@ -49,14 +45,12 @@
           </div>
         </div>
 
-        <!-- Submit -->
         <Button type="submit" :disabled="isLoading || !meta.valid" class="w-full">
           <span v-if="isLoading">Entrando...</span>
           <span v-else>Entrar</span>
         </Button>
       </form>
 
-      <!-- Link para registro -->
       <div class="text-center mt-4">
         <p class="text-sm text-muted-foreground">
           Não tem conta?

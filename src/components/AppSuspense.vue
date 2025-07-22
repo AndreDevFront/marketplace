@@ -1,6 +1,5 @@
 <template>
   <Suspense>
-    <!-- Conteúdo principal -->
     <template #default>
       <slot />
     </template>

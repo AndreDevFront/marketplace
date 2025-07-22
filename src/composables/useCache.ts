@@ -14,12 +14,6 @@ const cache: CacheMap = new Map()
 export const useCache = () => {
   const isLoading = ref(false)
 
-  /**
-   * Cache com TTL - Type Safe
-   * @param key - Chave única do cache
-   * @param fetcher - Função que busca os dados
-   * @param ttlMinutes - Tempo de vida em minutos (padrão: 5)
-   */
   const cached = async <T>(
     key: string,
     fetcher: () => Promise<T>,
@@ -28,17 +22,14 @@ export const useCache = () => {
     const now = Date.now()
     const cachedEntry = cache.get(key) as CacheEntry<T> | undefined
 
-    // Cache hit - dados ainda válidos
     if (cachedEntry && (now - cachedEntry.timestamp) < cachedEntry.ttl) {
       return cachedEntry.data
     }
 
-    // Cache miss - buscar dados novos
     try {
       isLoading.value = true
       const data = await fetcher()
 
-      // Salvar no cache com tipagem correta
       const entry: CacheEntry<T> = {
         data,
         timestamp: now,
@@ -53,11 +44,6 @@ export const useCache = () => {
     }
   }
 
-  /**
-   * Buscar dados do cache (sem fetch)
-   * @param key - Chave do cache
-   * @returns Dados ou null se não existir/expirado
-   */
   const getCached = <T>(key: string): T | null => {
     const now = Date.now()
     const cachedEntry = cache.get(key) as CacheEntry<T> | undefined
@@ -69,10 +55,6 @@ export const useCache = () => {
     return null
   }
 
-  /**
-   * Verificar se existe cache válido
-   * @param key - Chave do cache
-   */
   const hasCached = (key: string): boolean => {
     const now = Date.now()
     const cachedEntry = cache.get(key)
@@ -82,24 +64,16 @@ export const useCache = () => {
     )
   }
 
-  /**
-   * Limpar cache específico
-   * @param key - Chave do cache a ser removida
-   */
+
   const clearCache = (key: string): boolean => {
     return cache.delete(key)
   }
 
-  /**
-   * Limpar todo o cache
-   */
+
   const clearAllCache = (): void => {
     cache.clear()
   }
 
-  /**
-   * Obter estatísticas do cache
-   */
   const getCacheStats = () => {
     const entries = Array.from(cache.entries())
     const now = Date.now()
@@ -118,9 +92,7 @@ export const useCache = () => {
     }
   }
 
-  /**
-   * Limpar apenas entradas expiradas
-   */
+
   const clearExpired = (): number => {
     const now = Date.now()
     let removedCount = 0
